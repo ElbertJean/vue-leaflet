@@ -18,9 +18,9 @@ export default {
         </div>
         <nav class="divList">
             <ul>
-                <li><router-link to="/">Dashboard</router-link></li>
-                <li><router-link to="/mapas">Mapas</router-link></li>
-                <li><router-link to="/configuracoes">Configurações</router-link></li>
+                <li><router-link to="/" class="active">Dashboard</router-link></li>
+                <li><router-link to="/mapas" class="active">Mapas</router-link></li>
+                <li><router-link to="/configuracoes" class="active">Configurações</router-link></li>
             </ul>
         </nav>
     </div>
@@ -50,10 +50,16 @@ export default {
     align-items: center;
     gap: 40px;
 }
-.divList li {
+.active {
     list-style: none;
     color: white;
     font-weight: bold;
     font-size: 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.active:hover {
+    color: #C9D1D9;
+    text-decoration: underline;
 }
 </style>

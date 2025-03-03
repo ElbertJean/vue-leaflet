@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-  <div id="app">
+  <div>
     <NavBar />
     <router-view></router-view>
   </div>
