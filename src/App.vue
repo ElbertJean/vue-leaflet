@@ -1,18 +1,16 @@
 <script>
-  import MapView from './components/MapView/MapView.vue';
-  import NavBar from './components/NavBar/NavBar.vue';
+import NavBar from './components/NavBar/NavBar.vue';
 
-  export default {
-    components: {
-      MapView,
-      NavBar
-    }
+export default {
+  components: {
+    NavBar 
   }
+}
 </script>
 
 <template>
-  <main>
+  <div id="app">
     <NavBar />
-    <MapView />
-  </main>
+    <router-view></router-view>
+  </div>
 </template>
