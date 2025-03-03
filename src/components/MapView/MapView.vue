@@ -26,7 +26,6 @@ import L from 'leaflet';
 import 'leaflet-draw';
 import { LMap, LTileLayer, LControlScale, LGeoJson, LControlLayers } from 'vue2-leaflet';
 import GlebesLayer from './GlebesLayer.vue';
-import polygons from './server/polygons.js';
 
 export default {
   components: {
@@ -58,6 +57,10 @@ export default {
       zoom: 14,
       center: [-23.129096216749616, -45.82651434998431],
       polygons: this.loadPolygons(),
+      polygonDrawn: {
+        type: 'FeatureCollection',
+        features: []
+      },
     };
   },
   methods: {
@@ -76,15 +79,6 @@ export default {
       });
 
       map.addControl(drawControl);
-
-      const positionControl = L.control.locate({
-        position: 'topright',
-        locateOptions: {
-          enableHighAccuracy: true,
-        }
-      })
-
-      map.addControl(positionControl);
 
       map.on(L.Draw.Event.CREATED, (e) => {
         const layer = e.layer;
@@ -108,8 +102,6 @@ export default {
     savePolygonsToLocalStorage() {
       try {
         localStorage.setItem('polygons', JSON.stringify(this.polygons));
-        console.log(this.polygons);
-        console.log('Polygons saved to localStorage');
       } catch (error) {
         console.error('Error saving polygons to localStorage:', error);
       }
@@ -117,10 +109,10 @@ export default {
     loadPolygons() {
       try {
         const storedPolygons = localStorage.getItem('polygons');
-        return storedPolygons ? JSON.parse(storedPolygons) : polygons;
+        return storedPolygons ? JSON.parse(storedPolygons) : this.polygonDrawn;
       } catch (error) {
         console.error('Error loading polygons from localStorage:', error);
-        return polygons;
+        return this.polygonDrawn;
       }
     },
   },
